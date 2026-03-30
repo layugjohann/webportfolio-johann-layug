@@ -22,15 +22,15 @@
   },
   {
     "id": 4,
-    "title": "Nordic Furnishing",
-    "description": "A static web page for furniture shop. Made with HTML, CSS and Bootstrap.",
+    "title": "Nordic Furnishings",
+    "description": "A static web page for a furniture shop. Made with HTML, CSS and Bootstrap.",
     "link": "https://layugjohann.github.io/Layug-mte-81/s81-MTE/",
     "img": "images/card4.png"
   },
   {
     "id": 5,
     "title": "TechHub",
-    "description": "A static webpage for Education Hub. Made with HTML, CSS and Bootstrap.",
+    "description": "A static webpage for an Educational Hub. Made with HTML, CSS and Bootstrap.",
     "link": "https://layugjohann.github.io/Layug-mte-82/",
     "img": "images/card5.png"
   }
