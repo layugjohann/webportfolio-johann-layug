@@ -1,44 +1,37 @@
 [
   {
     "id": 1,
-    "title": "E-commerce API Documentation",
-    "description": "Short description goes here.",
-    "link": "#",
-    "img": ""
+    "title": "E-commerce API",
+    "description": "A fully functional REST API for an online store, enabling users to browse products, manage carts, place orders, and communicate with sellers.",
+    "link": "https://github.com/layugjohann/Ecommerce-API",
+    "img": "images/card1.png"
   },
   {
     "id": 2,
-    "title": "Course Booking API Documentation",
-    "description": "Short description goes here.",
-    "link": "#",
-    "img": ""
+    "title": "Food Delivery Service API",
+    "description": "A RESTful API for a food delivery platform, supporting customer orders, delivery tracking, rider management, and in-app messaging between users and restaurants.",
+    "link": "https://github.com/layugjohann/Food-Delivery-API",
+    "img": "images/card2.png"
   },
   {
     "id": 3,
-    "title": "Course booking App",
-    "description": "Short description goes here.",
-    "link": "#",
-    "img": ""
+    "title": "E-commerce App",
+    "description": "A fully functioning Ecommerce App with its own server. Made with VueJS, NodeJS and ExpressJS",
+    "link": "http://zuitt-bootcamp-prod-593-9384-ramos.s3-website.us-east-1.amazonaws.com/",
+    "img": "images/card3.png"
   },
   {
     "id": 4,
-    "title": "E-commerce App",
-    "description": "Short description goes here.",
-    "link": "#",
-    "img": ""
+    "title": "Nordic Furnishing",
+    "description": "A static web page for furniture shop. Made with HTML, CSS and Bootstrap.",
+    "link": "https://layugjohann.github.io/Layug-mte-81/s81-MTE/",
+    "img": "images/card4.png"
   },
   {
     "id": 5,
-    "title": "Airline Booking System Mockup",
-    "description": "Short description goes here.",
-    "link": "#",
-    "img": ""
-  },
-  {
-    "id": 6,
-    "title": "Airline Booking System Prototype",
-    "description": "Short description goes here.",
-    "link": "#",
-    "img": ""
+    "title": "TechHub",
+    "description": "A static webpage for Education Hub. Made with HTML, CSS and Bootstrap.",
+    "link": "https://layugjohann.github.io/Layug-mte-82/",
+    "img": "images/card5.png"
   }
 ]

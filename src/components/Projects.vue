@@ -11,15 +11,13 @@
         :key="project.id"
         :href="project.link"
         target="_blank"
-        class="project-row text-decoration-none"
+        class="project-link"
       >
-        <div class="card project-card bg-secondary bg-opacity-25 border-0 rounded-4 p-3 h-100">
-          <img v-if="project.img" :src="project.img" class="card-img-top" alt="" />
-          <div class="card-body text-center">
-            <h5 class="fw-bold text-muted">{{ project.title }}</h5>
-            <p>{{ project.description }}</p>
-          </div>
-        </div>
+        <ProjectCard
+          :title="project.title"
+          :description="project.description"
+          :img="project.img"
+        />
       </a>
     </div>
   </section>
@@ -27,9 +25,11 @@
 
 <script>
 import projectsList from '../data/projects';
+import ProjectCard from './ProjectsCard.vue';
 
 export default {
   name: 'Projects',
+  components: { ProjectCard },
   data() {
     return {
       projects: projectsList
@@ -45,13 +45,15 @@ export default {
   gap: 1rem;
   padding: 1rem 0;
   scroll-behavior: smooth;
+  justify-content: flex-start; /* aligns cards to left; use center if few cards */
 }
 
-.project-row {
-  flex: 0 0 300px; /* fixed card width */
-  min-width: 300px;
+.project-link {
+  flex: 0 0 auto;  /* keeps cards inline for horizontal scroll */
+  text-decoration: none;
 }
 
+/* Optional: custom scrollbar */
 .project-scroll::-webkit-scrollbar {
   height: 8px;
 }
