@@ -474,7 +474,6 @@ html {
 .profile-image-window {
     margin: 0 5px;
 
-    /* Change from black to white */
     background: #ffffff;
 
     border-top: 2px solid #808080;
@@ -483,17 +482,21 @@ html {
     border-bottom: 2px solid #ffffff;
 
     overflow: hidden;
+
+    /* Give the image panel a defined size */
+    width: calc(100% - 10px);
 }
 
 .hero-img {
     display: block;
 
+    /* Fill the entire image window */
     width: 100%;
-    height: auto;
+    height: 100%;
 
-    object-fit: contain;
+    /* Fill available space without stretching */
+    object-fit: cover;
 
-    /* Remove existing rounded image styling */
     border-radius: 0 !important;
 
     image-rendering: pixelated;
