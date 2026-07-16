@@ -29,8 +29,47 @@
             </div>
 
             <!-- Hero Image -->
-            <div class="col-12 col-md-6 text-center mt-4 mt-md-0">
-                <img src="/images/johann-pixel3.png" alt="Profile Photo" class="hero-img img-fluid">
+            <div class="col-12 col-md-6 mt-4 mt-md-0 d-flex justify-content-center">
+                <div class="win98-profile-window">
+
+                    <!-- Title Bar -->
+                    <div class="win98-profile-titlebar">
+                        <div class="profile-title-left">
+                            <span class="profile-window-icon">▣</span>
+                            <span>johann_profile.exe</span>
+                        </div>
+
+                        <div class="profile-window-controls">
+                            <button aria-label="Minimize">_</button>
+                            <button aria-label="Maximize">□</button>
+                            <button aria-label="Close">×</button>
+                        </div>
+                    </div>
+
+                    <!-- Menu -->
+                    <div class="win98-profile-menu">
+                        <span><u>F</u>ile</span>
+                        <span><u>E</u>dit</span>
+                        <span><u>V</u>iew</span>
+                        <span><u>H</u>elp</span>
+                    </div>
+
+                    <!-- Image -->
+                    <div class="profile-image-window">
+                        <img
+                            src="/images/johann-pixel3.png"
+                            alt="Johann Pixel Portrait"
+                            class="hero-img"
+                        >
+                    </div>
+
+                    <!-- Status Bar -->
+                    <div class="profile-status-bar">
+                        <span>Johann Layug</span>
+                        <span>Online</span>
+                    </div>
+
+                </div>
             </div>
 
         </div>

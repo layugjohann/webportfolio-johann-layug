@@ -335,6 +335,214 @@ html {
   pointer-events: none;
 }
 
+/* =================================
+   HERO WINDOWS 98 PROFILE WINDOW
+================================= */
+
+.win98-profile-window {
+    width: 100%;
+    max-width: 430px;
+
+    padding: 3px;
+
+    background: #c0c0c0;
+
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+
+    box-shadow:
+        inset -1px -1px #808080,
+        inset 1px 1px #dfdfdf;
+
+    color: #000000;
+
+    font-family: "Courier New", monospace;
+}
+
+
+/* =================================
+   TITLE BAR
+================================= */
+
+.win98-profile-titlebar {
+    min-height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 3px 3px 3px 7px;
+
+    background: linear-gradient(
+        90deg,
+        #000080,
+        #1084d0
+    );
+
+    color: #ffffff;
+
+    font-weight: bold;
+}
+
+.profile-title-left {
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    min-width: 0;
+}
+
+.profile-title-left span:last-child {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.profile-window-icon {
+    font-size: 15px;
+}
+
+
+/* =================================
+   WINDOW BUTTONS
+================================= */
+
+.profile-window-controls {
+    display: flex;
+
+    gap: 2px;
+
+    margin-left: 8px;
+}
+
+.profile-window-controls button {
+    width: 25px;
+    height: 23px;
+
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #c0c0c0;
+    color: #000000;
+
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+}
+
+.profile-window-controls button:active {
+    border-top: 2px solid #000000;
+    border-left: 2px solid #000000;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+}
+
+
+/* =================================
+   MENU BAR
+================================= */
+
+.win98-profile-menu {
+    display: flex;
+
+    gap: 18px;
+
+    padding: 7px 10px;
+
+    font-size: 13px;
+}
+
+.win98-profile-menu span {
+    cursor: default;
+}
+
+
+/* =================================
+   IMAGE PANEL
+================================= */
+
+.profile-image-window {
+    margin: 0 5px;
+
+    background: #000000;
+
+    border-top: 2px solid #808080;
+    border-left: 2px solid #808080;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+
+    overflow: hidden;
+}
+
+.hero-img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    object-fit: contain;
+
+    image-rendering: pixelated;
+}
+
+
+/* =================================
+   STATUS BAR
+================================= */
+
+.profile-status-bar {
+    display: grid;
+
+    grid-template-columns: 1fr auto;
+
+    gap: 3px;
+
+    padding: 4px 3px 2px;
+}
+
+.profile-status-bar span {
+    padding: 4px 7px;
+
+    font-size: 11px;
+
+    border-top: 2px solid #808080;
+    border-left: 2px solid #808080;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+}
+
+
+/* =================================
+   RESPONSIVE
+================================= */
+
+@media (max-width: 768px) {
+    .win98-profile-window {
+        max-width: 340px;
+    }
+
+    .win98-profile-menu {
+        gap: 14px;
+
+        font-size: 12px;
+    }
+
+    .profile-title-left {
+        font-size: 12px;
+    }
+}
+
 
 
 
