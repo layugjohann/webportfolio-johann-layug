@@ -333,7 +333,7 @@ html {
 
 .win98-profile-window {
     width: 100%;
-    max-width: 430px;
+    max-width: 430px; /* Controls overall window width */
 
     padding: 3px;
 
@@ -467,6 +467,12 @@ html {
 .profile-image-window {
     margin: 0 5px;
 
+    /* Controls the height of the hero image area */
+    height: 400px;
+
+    /* Account for left and right margin */
+    width: calc(100% - 10px);
+
     background: #ffffff;
 
     border-top: 2px solid #808080;
@@ -475,9 +481,6 @@ html {
     border-bottom: 2px solid #ffffff;
 
     overflow: hidden;
-
-    /* Give the image panel a defined size */
-    width: calc(100% - 10px);
 }
 
 .hero-img {
@@ -487,13 +490,17 @@ html {
     width: 100%;
     height: 100%;
 
-    /* Fill available space without stretching */
+    /* Fill the window without stretching the image */
     object-fit: cover;
+
+    /* Adjust image position if cropping occurs */
+    object-position: center;
 
     border-radius: 0 !important;
 
     image-rendering: pixelated;
 }
+
 
 /* =================================
    STATUS BAR
@@ -530,6 +537,11 @@ html {
         max-width: 340px;
     }
 
+    .profile-image-window {
+        /* Smaller image height on mobile */
+        height: 320px;
+    }
+
     .win98-profile-menu {
         gap: 14px;
 
@@ -540,7 +552,6 @@ html {
         font-size: 12px;
     }
 }
-
 
 
 
