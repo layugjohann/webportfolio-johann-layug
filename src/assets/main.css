@@ -277,7 +277,63 @@ html {
   line-height: 1.4;
 }
 
+.win98-button {
+  display: inline-block;
 
+  padding: 10px 22px;
+
+  background: #c0c0c0;
+  color: #000000;
+
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  font-weight: bold;
+
+  text-decoration: none;
+
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+
+  box-shadow:
+    inset -1px -1px #808080,
+    inset 1px 1px #dfdfdf;
+
+  cursor: pointer;
+
+  transition: none;
+}
+
+.win98-button:hover {
+  background: #c0c0c0;
+  color: #000000;
+}
+
+.win98-button:active {
+  border-top: 2px solid #000000;
+  border-left: 2px solid #000000;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+
+  box-shadow:
+    inset 1px 1px #808080;
+
+  transform: translate(1px, 1px);
+}
+
+.win98-button:focus {
+  outline: 1px dotted #000000;
+  outline-offset: -5px;
+}
+
+.win98-button::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px dotted #000000;
+  pointer-events: none;
+}
 
 
 

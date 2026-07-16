@@ -3,7 +3,7 @@
     "id": 1,
     "title": "ApplyFlow",
     "description": "AI-powered career management platform for organizing job applications, analyzing job descriptions, and providing intelligent resume matching.",
-    "link": "https://github.com/layugjohann/Ecommerce-API",
+    "link": "http://127.0.0.1:8000/jobs/dashboard/",
     "img": "images/appyflow.png"
   },
   {

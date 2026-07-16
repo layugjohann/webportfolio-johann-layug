@@ -8,7 +8,7 @@
                 <h1 class="fw-bold">Hi, I'm Johann</h1>
                 <h4 class="text-light">Full Stack Web Developer • Designer • Creator</h4>
 
-                <a href="#projects" class="btn mt-3 px-4 py-2 rounded-pill" id="base">
+                <a href="#projects" class="win98-button mt-3">
                     View My Projects
                 </a>
 
