@@ -173,7 +173,6 @@ html {
     flex: 0 0 auto;          
     min-width: 250px;       
     max-width: 300px;       
-    border-radius: 20px;
     overflow: hidden;
 }
 
@@ -475,7 +474,8 @@ html {
 .profile-image-window {
     margin: 0 5px;
 
-    background: #000000;
+    /* Change from black to white */
+    background: #ffffff;
 
     border-top: 2px solid #808080;
     border-left: 2px solid #808080;
@@ -493,9 +493,11 @@ html {
 
     object-fit: contain;
 
+    /* Remove existing rounded image styling */
+    border-radius: 0 !important;
+
     image-rendering: pixelated;
 }
-
 
 /* =================================
    STATUS BAR
