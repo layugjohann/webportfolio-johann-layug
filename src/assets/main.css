@@ -74,13 +74,6 @@ html {
   line-height: 1.4;
 }
 
-#landing img {
-  width: 300px;         
-    height: 300px;        
-    object-fit: cover;    
-    border-radius: 50%;   
-    border: 5px solid #fff; 
-}
 
 #base {
   
