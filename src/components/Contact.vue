@@ -1,170 +1,295 @@
+<script setup>
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { Notyf } from 'notyf'
+import 'notyf/notyf.min.css'
+import { person } from '@/data/person'
+
+const WEB3FORMS_URL = 'https://api.web3forms.com/submit'
+const WEB3FORMS_ACCESS_KEY = '4e0dba34-036a-4c1a-847d-2a3245797145'
+const SUBJECT = 'New message from Portfolio Contact form'
+const SEND_FAILED = 'Failed to send message. Please try again or email me directly.'
+const RECAPTCHA_SITE_KEY = '6LfvrX8sAAAAAFi4StqxyRqoWbwDWHUphUyvmSc7'
+
+const name = ref('')
+const email = ref('')
+const message = ref('')
+const sending = ref(false)
+
+const recaptchaContainer = ref(null)
+const recaptchaToken = ref('')
+let recaptchaWidgetId = null
+let recaptchaPoll = null
+
+// Created on mount so the toast container only exists while the page does.
+let notyf = null
+
+function renderRecaptcha() {
+  recaptchaWidgetId = window.grecaptcha.render(recaptchaContainer.value, {
+    sitekey: RECAPTCHA_SITE_KEY,
+    theme: 'dark',
+    callback: (token) => {
+      recaptchaToken.value = token
+    },
+    'expired-callback': () => {
+      recaptchaToken.value = ''
+    },
+  })
+}
+
+function resetRecaptcha() {
+  recaptchaToken.value = ''
+  if (recaptchaWidgetId !== null) window.grecaptcha.reset(recaptchaWidgetId)
+}
+
+async function submitForm() {
+  if (!recaptchaToken.value) {
+    notyf.error('Please verify that you are not a robot')
+    return
+  }
+
+  sending.value = true
+  try {
+    const response = await fetch(WEB3FORMS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_ACCESS_KEY,
+        subject: SUBJECT,
+        name: name.value,
+        email: email.value,
+        message: message.value,
+      }),
+    })
+    const result = await response.json().catch(() => ({}))
+
+    if (!response.ok || !result.success) {
+      notyf.error(SEND_FAILED)
+      return
+    }
+
+    notyf.success('Message sent! I’ll get back to you soon.')
+    name.value = ''
+    email.value = ''
+    message.value = ''
+    resetRecaptcha()
+  } catch {
+    notyf.error(SEND_FAILED)
+  } finally {
+    sending.value = false
+  }
+}
+
+onMounted(() => {
+  notyf = new Notyf({
+    duration: 5000,
+    position: { x: 'right', y: 'bottom' },
+    types: [
+      { type: 'success', background: 'var(--accent)' },
+      { type: 'error', background: 'var(--accent-2)' },
+    ],
+  })
+
+  // The reCAPTCHA script loads async; render as soon as it is ready.
+  const ready = () => window.grecaptcha && window.grecaptcha.render
+  if (ready()) {
+    renderRecaptcha()
+    return
+  }
+  recaptchaPoll = setInterval(() => {
+    if (!ready()) return
+    clearInterval(recaptchaPoll)
+    renderRecaptcha()
+  }, 100)
+})
+
+onBeforeUnmount(() => {
+  clearInterval(recaptchaPoll)
+  notyf?.dismissAll()
+})
+</script>
+
 <template>
-	<section class="container py-5" id="contact">
-    <div class="text-center mb-4">
-        <h2 class="fw-bold">Contact Me!</h2>
-        <h4 class="text-muted">Let’s work on something together</h4>
+  <section id="contact" class="contact" aria-labelledby="contact-title">
+    <div class="section-head">
+      <h2 id="contact-title">Contact</h2>
     </div>
 
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-6">
-
-            <form @submit.prevent="submitForm">
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Your Name</label>
-                    <input name="name" type="text" class="form-control" placeholder="Enter name">
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Your Email</label>
-                    <input name="email" type="email" class="form-control" placeholder="Enter email">
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Message</label>
-                    <textarea name="message" class="form-control" rows="4" placeholder="Write message"></textarea>
-                </div>
-
-				<div class="mb-3 d-flex justify-content-center">
-    				<div ref="recaptchaContainer"></div>
-  				</div>
-
-                <button class="btn btn-dark w-100 py-2 rounded-pill">Send Message</button>
-            </form>
-
+    <div class="body">
+      <div class="reach">
+        <p class="lede">Hiring for an FDE or Agentic Engineering role? Send a message, or reach me directly.</p>
+        <div class="links">
+          <a
+            v-for="link in person.socialLinks"
+            :key="link.label"
+            :href="link.href"
+            class="link-btn"
+            v-bind="link.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {}"
+          >
+            <img :src="link.icon" width="18" height="18" alt="" />
+            {{ link.label }}
+          </a>
         </div>
+        <p class="location">{{ person.location }}</p>
+      </div>
+
+      <form class="form" @submit.prevent="submitForm">
+        <label>
+          <span>Your name</span>
+          <input v-model="name" name="name" type="text" autocomplete="name" required />
+        </label>
+        <label>
+          <span>Your email</span>
+          <input v-model="email" name="email" type="email" autocomplete="email" required />
+        </label>
+        <label>
+          <span>Message</span>
+          <textarea v-model="message" name="message" rows="5" required></textarea>
+        </label>
+
+        <div ref="recaptchaContainer" class="recaptcha"></div>
+
+        <button type="submit" class="send" :disabled="sending">
+          {{ sending ? 'Sending…' : 'Send message →' }}
+        </button>
+      </form>
     </div>
-</section>
+  </section>
 </template>
 
-<script setup>
-	
-import {ref, onMounted, onBeforeUnmount} from "vue";
+<style scoped>
+.contact {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  padding: 32px max(16px, calc((100% - var(--page-width)) / 2 + var(--page-gutter))) 96px;
+}
+.section-head {
+  border-bottom: 2px dashed var(--line);
+  padding-bottom: 16px;
+}
+h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 32px;
+  margin: 0;
+}
+.body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  padding-top: 40px;
+  align-items: start;
+}
+.lede {
+  font-size: 18px;
+  line-height: 1.6;
+  margin: 0;
+}
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+.link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-weight: 600;
+  text-decoration: none;
+  clip-path: var(--notch);
+}
+.link-btn:hover,
+.link-btn:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.link-btn img {
+  image-rendering: pixelated;
+}
+.location {
+  margin: 24px 0 0;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--muted);
+}
+.form {
+  display: grid;
+  gap: 16px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-panel);
+  padding: 24px;
+  min-width: 0;
+}
+label {
+  display: grid;
+  gap: 6px;
+}
+label span {
+  font-family: var(--font-label);
+  font-size: 12px;
+  color: var(--accent);
+}
+input,
+textarea {
+  font: inherit;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  padding: 10px 12px;
+  width: 100%;
+}
+textarea {
+  resize: vertical;
+}
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.recaptcha {
+  min-height: 78px;
+  max-width: 100%;
+  overflow: hidden;
+}
+.send {
+  font: inherit;
+  font-weight: 700;
+  background: var(--accent);
+  color: var(--on-accent);
+  border: 0;
+  padding: 14px 22px;
+  cursor: pointer;
+  clip-path: var(--notch);
+}
+.send:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+@media (max-width: 860px) {
+  .body {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+</style>
 
-    import {Notyf} from "notyf";
-    import "notyf/notyf.min.css";
-
-    const notyf = new Notyf();
-
-    const WEB3FORMS_ACCESS_KEY = "4e0dba34-036a-4c1a-847d-2a3245797145";
-
-    // email subject
-    const subject = "New message from Portfolio Contact form";
-
-    const name = ref("");
-    const email = ref("");
-    const message = ref("");
-
-    const isLoading = ref(false);
-
-    const submitForm = async()=> {
-
-        // Check if reCAPTCHA token is present, return an error when not verified
-        if(!recaptchaToken.value){
-            notyf.error("Please verify that you are not a robot")
-            return;
-        }
-
-        isLoading.value = true;
-
-
-        try{
-            const response = await fetch("https://api.web3forms.com/submit", {
-                method: "POST",
-                headers: {
-                    "Content-Type" : "application/json",
-                    Accept: "application/json"
-                },
-                body: JSON.stringify({
-                    access_key: WEB3FORMS_ACCESS_KEY,
-                    subject: subject,
-                    name: name.value,
-                    email: email.value,
-                    message: message.value
-                })
-            })
-
-            const result = await response.json();
-
-            if(result.success){
-                console.log(result);
-                isLoading.value = false;
-                notyf.success("Message Sent!");
-            }
-            else{
-                isLoading.value = false;
-                notyf.error("Failed to send message");
-            }
-        }
-        catch(error){
-            console.log(error);
-            isLoading.value = false;
-            notyf.error("Failed to send message");
-        }
-        
-
-    }
-    
-
-
-    const SITE_KEY = '6LfvrX8sAAAAAFi4StqxyRqoWbwDWHUphUyvmSc7';
-
-    const recaptchaContainer = ref(null);
-    const recaptchaWidgetId = ref(null);
-    const recaptchaToken = ref('');
-
-    // Callback called by reCAPTCHA when successful
-    function onRecaptchaSuccess(token) {
-      recaptchaToken.value = token;
-    }
-
-    // Callback when expired
-    function onRecaptchaExpired() {
-      recaptchaToken.value = '';
-    }
-
-    // Function to render the reCAPTCHA widget
-    function renderRecaptcha() {
-      if (!window.grecaptcha) {
-        console.error('reCAPTCHA not loaded');
-        return;
-      }
-
-      recaptchaWidgetId.value = window.grecaptcha.render(recaptchaContainer.value, {
-        sitekey: SITE_KEY,
-        size: 'normal', // or 'compact'
-        callback: onRecaptchaSuccess,
-        'expired-callback': onRecaptchaExpired,
-      });
-    }
-
-    // Function to reset reCAPTCHA 
-    function resetRecaptcha() {
-      if (recaptchaWidgetId.value !== null) {
-        window.grecaptcha.reset(recaptchaWidgetId.value);
-        recaptchaToken.value = '';
-      }
-    }
-
-
-
-    onMounted(() => {
-      // This code waits for the Google reCAPTCHA library to load, then renders the reCAPTCHA widget using onMounted hook. 
-      // The widget is rendered with grecaptcha.render(), which requires a sitekey. 
-      // Callback functions handle success and expiration events. 
-      // reCAPTCHA is reset upon form submission to clear the token.
-      const interval = setInterval(() => {
-        if (window.grecaptcha && window.grecaptcha.render) {
-          renderRecaptcha();
-          clearInterval(interval);
-        }
-      }, 100);
-
-      onBeforeUnmount(() => {
-        clearInterval(interval);
-      });
-    });
-
-    
-
-
-</script>
+<style>
+/* Notyf renders toasts on document.body, outside this component's scope. */
+.notyf__toast {
+  border-radius: 0;
+  clip-path: var(--notch);
+  font-family: var(--font-body);
+}
+.notyf__message {
+  color: var(--on-accent);
+  font-weight: 600;
+}
+</style>

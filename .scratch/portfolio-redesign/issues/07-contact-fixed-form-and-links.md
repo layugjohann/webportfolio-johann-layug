@@ -4,12 +4,12 @@
 
 **Blocked by:** 03
 
-**Status:** ready-for-agent
+**Status:** done
 
-- [ ] The name, email and message fields are bound to the form's state
-- [ ] Submitting without a reCAPTCHA token sends nothing and shows an error toast
-- [ ] On success, it posts JSON to Web3Forms (access key, subject, name, email, message), shows a success toast, clears the fields and resets reCAPTCHA
-- [ ] On a failed response or a network error, it shows an error toast
-- [ ] Submit is disabled while sending
-- [ ] The Email / LinkedIn / GitHub buttons use the shared social config from 03
-- [ ] Tests: no token means no request is sent; with a token, the request body contains exactly the typed name, email and message; the fields clear after success; an error shows on failure
+- [x] The name, email and message fields are bound to the form's state
+- [x] Submitting without a reCAPTCHA token sends nothing and shows an error toast
+- [x] On success, it posts JSON to Web3Forms (access key, subject, name, email, message), shows a success toast, clears the fields and resets reCAPTCHA
+- [x] On a failed response or a network error, it shows an error toast
+- [x] Submit is disabled while sending
+- [x] The Email / LinkedIn / GitHub buttons use the shared social config from 03
+- [x] Tests: no token means no request is sent; with a token, the request body contains exactly the typed name, email and message; the fields clear after success; an error shows on failure

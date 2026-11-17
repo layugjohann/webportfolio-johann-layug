@@ -1,11 +1,12 @@
-// Who the site is about. The single source for social links; Contact moves
-// onto it in ticket 07.
+// Who the site is about. The single source for social links, shared by the
+// hero and Contact.
 export const person = {
   name: 'Johann Layug',
   status: 'Open to FDE & Agentic Engineering roles',
   headline: 'I build AI agents that survive contact with real users.',
   tagline: 'Full-stack engineer shipping LLM-powered tools end to end, from the first customer conversation to the deployed agent.',
   portrait: '/images/johann-pixel3.png',
+  location: 'Philippines (UTC+8) · Open to remote',
   // Empty until a résumé exists; the Résumé link renders only when this is set.
   resumeUrl: '',
   about:
