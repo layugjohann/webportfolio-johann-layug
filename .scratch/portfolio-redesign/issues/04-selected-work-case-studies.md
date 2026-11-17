@@ -27,3 +27,7 @@ Project data shape (from the prototype):
 - [ ] The old Projects component, the old project data and the unused old project images are removed
 - [ ] Tests (with fixture Projects): display order, the badge on in-progress only, the empty-link rules (including a Project with no links at all), the terminal card when there's no image
 - [ ] Tests (real data): unique ids, at least one public link per Project, no `[?]` placeholder text
+
+## Comments
+
+- 2026-11-17, Johann: there are no Project screenshots yet; they will be added once the redesign is finished. For this ticket, all three Projects ship with `img: ''` and render the terminal card. The screenshot checkbox is deferred, not dropped. Adding the images later is a data-only change (set `img` and drop the files in `public/images/`).
