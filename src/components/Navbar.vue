@@ -32,6 +32,7 @@ const sections = [
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   gap: 16px;
   position: relative;
   z-index: 1;

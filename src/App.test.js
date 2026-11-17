@@ -38,3 +38,13 @@ describe('the page', () => {
     for (const project of projectData) expect(work).not.toContain(project.title)
   })
 })
+
+describe('the nav', () => {
+  it('links every section directly, with nothing to open first', () => {
+    const wrapper = mount(App)
+    const nav = wrapper.find('nav')
+
+    const hrefs = nav.findAll('a').map((a) => a.attributes('href'))
+    expect(hrefs).toEqual(expect.arrayContaining(['#work', '#about', '#contact']))
+  })
+})
