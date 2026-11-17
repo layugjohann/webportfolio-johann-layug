@@ -4,7 +4,7 @@
 
 **Blocked by:** None (can start immediately)
 
-**Status:** ready-for-agent
+**Status:** done
 
 - [x] A `.gitignore` ignores `node_modules`, `dist`, `.DS_Store` and `.env*`
 - [x] `node_modules` and every `.DS_Store` are removed from the git index (the files stay on disk)
