@@ -41,27 +41,6 @@ a,
   box-sizing: border-box;
 }
 
-#tools {
-  background-image:url("/images/background-tools.png"); 
-  background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    min-height: 100vh;
-}
-
-#tools h2 {
-  font-family: Pixelify Sans;
-  font-weight: 900;
-  font-size: 70px;
-  color:  white;  
-}
-
-#tools h4 {
-  font-family: Lato;
-  font-weight: 500;
-  line-height: 1.4;
-}
-
 #contact h2{
   font-family: Pixelify Sans;
   font-weight: 900;

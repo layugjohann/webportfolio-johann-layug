@@ -4,12 +4,12 @@
 
 **Blocked by:** 03
 
-**Status:** ready-for-agent
+**Status:** done
 
-- [ ] Chip groups:
+- [x] Chip groups:
   - **Agents**: Claude Code, tool use, evals, traces, Groq / Claude / OpenAI APIs
   - **Product**: TypeScript, Next.js, Vue, Python, Django, Postgres
   - **Ship**: Vercel, GitHub Actions, Docker
-- [ ] The nav's About link scrolls here
-- [ ] The old Tools component and its now-unused tool icons are removed
-- [ ] Tests: each group heading and its chips render
+- [x] The nav's About link scrolls here
+- [x] The old Tools component and its now-unused tool icons are removed
+- [x] Tests: each group heading and its chips render

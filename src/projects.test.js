@@ -33,7 +33,7 @@ describe('the real Project data', () => {
   })
 
   it('is what the page shows by default, in order', () => {
-    const headings = mount(App).findAll('h3').map((h) => h.text())
+    const headings = mount(App).find('#work').findAll('h3').map((h) => h.text())
 
     expect(headings).toHaveLength(projects.length)
     projects.forEach((p, i) => expect(headings[i]).toContain(p.title))
