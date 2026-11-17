@@ -21,6 +21,8 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Pixelify Sans draws "fi" as one glyph that reads as "A" ("fixline" → "Axline"). */
+  font-variant-ligatures: none;
 }
 
 h1,
