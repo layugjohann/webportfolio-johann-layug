@@ -1,0 +1,39 @@
+/* Design tokens for the redesign. Components use these, never raw values. */
+:root {
+  --bg: #0b0d12;
+  --panel: #12161f;
+  --line: #262c3b;
+  --text: #e8ebf3;
+  --muted: #8a93ab;
+  --accent: #7cff6b;
+  --accent-2: #ffb84d;
+  --on-accent: #071006;
+
+  --font-display: 'Pixelify Sans', monospace;
+  --font-label: 'Silkscreen', monospace;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --page-width: 1160px;
+  --page-gutter: 24px;
+
+  --shadow-hard: 10px 10px 0 var(--accent);
+
+  /* Notched (stepped) corners: apply with clip-path: var(--notch). */
+  --notch: polygon(
+    0 6px, 3px 6px, 3px 3px, 6px 3px, 6px 0,
+    calc(100% - 6px) 0, calc(100% - 6px) 3px, calc(100% - 3px) 3px, calc(100% - 3px) 6px, 100% 6px,
+    100% calc(100% - 6px), calc(100% - 3px) calc(100% - 6px), calc(100% - 3px) calc(100% - 3px), calc(100% - 6px) calc(100% - 3px), calc(100% - 6px) 100%,
+    6px 100%, 6px calc(100% - 3px), 3px calc(100% - 3px), 3px calc(100% - 6px), 0 calc(100% - 6px)
+  );
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

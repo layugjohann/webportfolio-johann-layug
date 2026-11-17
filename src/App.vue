@@ -16,15 +16,19 @@ defineProps({
 </script>
 
 <template>
-  <Navbar />
-  <Hero />
-  <Projects :projects="projects" />
-  <Tools />
+  <div id="top" class="top">
+    <Navbar />
+    <Hero />
+  </div>
+  <!-- Old sections, wrapped so the nav anchors land until tickets 04–07 replace them. -->
+  <div id="work"><Projects :projects="projects" /></div>
+  <div id="about"><Tools /></div>
   <Contact />
   <Footer />
-  
 </template>
 
 <style scoped>
-
+.top {
+  background: var(--bg);
+}
 </style>
