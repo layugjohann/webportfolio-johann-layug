@@ -1,5 +1,6 @@
 <script setup>
 import { person } from '@/data/person'
+import AgentConsole from './AgentConsole.vue'
 </script>
 
 <template>
@@ -36,6 +37,7 @@ import { person } from '@/data/person'
         <img :src="person.portrait" :alt="`${person.name}, pixel portrait`" />
         <figcaption>{{ person.name }}</figcaption>
       </figure>
+      <AgentConsole class="console" />
     </div>
   </header>
 </template>
@@ -124,6 +126,16 @@ h1 {
 .icon-btn:focus-visible {
   border-color: var(--accent);
 }
+.visual {
+  position: relative;
+  padding: 0 0 70px 40px;
+}
+.console {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 78%;
+}
 .icon-btn img,
 .portrait img {
   image-rendering: pixelated;
@@ -173,9 +185,17 @@ figcaption {
     gap: 40px;
     padding: 32px 16px 64px;
   }
+  .visual {
+    padding: 0;
+  }
   .portrait {
     margin: 0 auto;
     width: calc(100% - 10px);
+  }
+  .console {
+    position: relative;
+    width: calc(100% - 8px);
+    margin-top: 24px;
   }
 }
 </style>

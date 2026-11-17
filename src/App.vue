@@ -1,6 +1,7 @@
 <script setup>
 import Navbar from './components/Navbar.vue'
 import Hero from './components/Hero.vue'
+import PixelBackground from './components/PixelBackground.vue'
 import SelectedWork from './components/SelectedWork.vue'
 import Tools from './components/Tools.vue'
 import Contact from './components/Contact.vue'
@@ -17,6 +18,7 @@ defineProps({
 
 <template>
   <div id="top" class="top">
+    <PixelBackground />
     <Navbar />
     <Hero />
   </div>
@@ -29,6 +31,8 @@ defineProps({
 
 <style scoped>
 .top {
+  position: relative;
+  overflow: hidden;
   background: var(--bg);
 }
 </style>

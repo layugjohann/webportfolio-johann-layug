@@ -33,6 +33,8 @@ describe('the page', () => {
     expect(text).toContain('Fixture One')
     expect(text).toContain('Fixture Two')
     expect(text.indexOf('Fixture One')).toBeLessThan(text.indexOf('Fixture Two'))
-    for (const project of projectData) expect(text).not.toContain(project.title)
+    // Scoped to Selected Work: the hero's console is a fixline replay, so says "fixline".
+    const work = wrapper.find('#work').text()
+    for (const project of projectData) expect(work).not.toContain(project.title)
   })
 })

@@ -18,6 +18,7 @@
   --page-gutter: 24px;
 
   --shadow-hard: 10px 10px 0 var(--accent);
+  --shadow-panel: 8px 8px 0 var(--line);
 
   /* Notched (stepped) corners: apply with clip-path: var(--notch). */
   --notch: polygon(
