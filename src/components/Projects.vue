@@ -24,16 +24,16 @@
 </template>
 
 <script>
-import projectsList from '../data/projects';
 import ProjectCard from './ProjectsCard.vue';
 
 export default {
   name: 'Projects',
   components: { ProjectCard },
-  data() {
-    return {
-      projects: projectsList
-    };
+  props: {
+    projects: {
+      type: Array,
+      required: true
+    }
   }
 };
 </script>

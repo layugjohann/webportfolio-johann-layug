@@ -4,10 +4,10 @@
 
 **Blocked by:** 01
 
-**Status:** ready-for-agent
+**Status:** done
 
-- [ ] Vitest, Vue Test Utils and jsdom are dev dependencies, and `npm test` runs the suite
-- [ ] The root page component accepts an optional `projects` prop, which defaults to the Project data module
-- [ ] A shared test setup fakes `fetch`, `window.grecaptcha`, `matchMedia` and canvas `getContext`
-- [ ] A smoke test mounts the whole current page without errors
-- [ ] Tests assert only what a visitor sees or what leaves the page, never internal state or CSS
+- [x] Vitest, Vue Test Utils and jsdom are dev dependencies, and `npm test` runs the suite
+- [x] The root page component accepts an optional `projects` prop, which defaults to the Project data module
+- [x] A shared test setup fakes `fetch`, `window.grecaptcha`, `matchMedia` and canvas `getContext`
+- [x] A smoke test mounts the whole current page without errors
+- [x] Tests assert only what a visitor sees or what leaves the page, never internal state or CSS
