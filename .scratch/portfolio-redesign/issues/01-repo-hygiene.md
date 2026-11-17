@@ -6,7 +6,7 @@
 
 **Status:** ready-for-agent
 
-- [ ] A `.gitignore` ignores `node_modules`, `dist`, `.DS_Store` and `.env*`
-- [ ] `node_modules` and every `.DS_Store` are removed from the git index (the files stay on disk)
-- [ ] The stray duplicate `esbuild 2` binary is deleted
-- [ ] `npm install && npm run build` still succeeds, and `git status` is clean afterwards
+- [x] A `.gitignore` ignores `node_modules`, `dist`, `.DS_Store` and `.env*`
+- [x] `node_modules` and every `.DS_Store` are removed from the git index (the files stay on disk)
+- [x] The stray duplicate `esbuild 2` binary is deleted
+- [x] `npm install && npm run build` still succeeds, and `git status` is clean afterwards
