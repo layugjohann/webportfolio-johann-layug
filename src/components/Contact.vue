@@ -8,41 +8,42 @@ const WEB3FORMS_URL = 'https://api.web3forms.com/submit'
 const WEB3FORMS_ACCESS_KEY = '4e0dba34-036a-4c1a-847d-2a3245797145'
 const SUBJECT = 'New message from Portfolio Contact form'
 const SEND_FAILED = 'Failed to send message. Please try again or email me directly.'
-const RECAPTCHA_SITE_KEY = '6LfvrX8sAAAAAFi4StqxyRqoWbwDWHUphUyvmSc7'
+// Web3Forms' shared hCaptcha sitekey for free plans; Web3Forms verifies the token server-side.
+const HCAPTCHA_SITE_KEY = '50b2fe65-b00b-4b9e-ad62-3ba471098be2'
 
 const name = ref('')
 const email = ref('')
 const message = ref('')
 const sending = ref(false)
 
-const recaptchaContainer = ref(null)
-const recaptchaToken = ref('')
-let recaptchaWidgetId = null
-let recaptchaPoll = null
+const captchaContainer = ref(null)
+const captchaToken = ref('')
+let captchaWidgetId = null
+let captchaPoll = null
 
 // Created on mount so the toast container only exists while the page does.
 let notyf = null
 
-function renderRecaptcha() {
-  recaptchaWidgetId = window.grecaptcha.render(recaptchaContainer.value, {
-    sitekey: RECAPTCHA_SITE_KEY,
+function renderCaptcha() {
+  captchaWidgetId = window.hcaptcha.render(captchaContainer.value, {
+    sitekey: HCAPTCHA_SITE_KEY,
     theme: 'dark',
     callback: (token) => {
-      recaptchaToken.value = token
+      captchaToken.value = token
     },
     'expired-callback': () => {
-      recaptchaToken.value = ''
+      captchaToken.value = ''
     },
   })
 }
 
-function resetRecaptcha() {
-  recaptchaToken.value = ''
-  if (recaptchaWidgetId !== null) window.grecaptcha.reset(recaptchaWidgetId)
+function resetCaptcha() {
+  captchaToken.value = ''
+  if (captchaWidgetId !== null) window.hcaptcha.reset(captchaWidgetId)
 }
 
 async function submitForm() {
-  if (!recaptchaToken.value) {
+  if (!captchaToken.value) {
     notyf.error('Please verify that you are not a robot')
     return
   }
@@ -58,6 +59,7 @@ async function submitForm() {
         name: name.value,
         email: email.value,
         message: message.value,
+        'h-captcha-response': captchaToken.value,
       }),
     })
     const result = await response.json().catch(() => ({}))
@@ -71,7 +73,7 @@ async function submitForm() {
     name.value = ''
     email.value = ''
     message.value = ''
-    resetRecaptcha()
+    resetCaptcha()
   } catch {
     notyf.error(SEND_FAILED)
   } finally {
@@ -89,21 +91,21 @@ onMounted(() => {
     ],
   })
 
-  // The reCAPTCHA script loads async; render as soon as it is ready.
-  const ready = () => window.grecaptcha && window.grecaptcha.render
+  // The hCaptcha script loads async; render as soon as it is ready.
+  const ready = () => window.hcaptcha && window.hcaptcha.render
   if (ready()) {
-    renderRecaptcha()
+    renderCaptcha()
     return
   }
-  recaptchaPoll = setInterval(() => {
+  captchaPoll = setInterval(() => {
     if (!ready()) return
-    clearInterval(recaptchaPoll)
-    renderRecaptcha()
+    clearInterval(captchaPoll)
+    renderCaptcha()
   }, 100)
 })
 
 onBeforeUnmount(() => {
-  clearInterval(recaptchaPoll)
+  clearInterval(captchaPoll)
   notyf?.dismissAll()
 })
 </script>
@@ -146,7 +148,7 @@ onBeforeUnmount(() => {
           <textarea v-model="message" name="message" rows="5" required></textarea>
         </label>
 
-        <div ref="recaptchaContainer" class="recaptcha"></div>
+        <div ref="captchaContainer" class="captcha"></div>
 
         <button type="submit" class="send" :disabled="sending">
           {{ sending ? 'Sending…' : 'Send message →' }}
@@ -254,7 +256,7 @@ textarea:focus {
   outline: none;
   border-color: var(--accent);
 }
-.recaptcha {
+.captcha {
   min-height: 78px;
   max-width: 100%;
   overflow: hidden;

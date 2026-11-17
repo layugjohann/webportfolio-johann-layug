@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { flushPromises, mount } from '@vue/test-utils'
 import App from './App.vue'
-import { stubRecaptcha } from './test/setup'
+import { stubHcaptcha } from './test/setup'
 
 const field = (wrapper, name) => wrapper.find(`#contact [name="${name}"]`)
 
@@ -23,7 +23,7 @@ beforeEach(() => {
 })
 
 describe('Contact form', () => {
-  it('sends nothing and asks for the robot check when reCAPTCHA is unsolved', async () => {
+  it('sends nothing and asks for the robot check when hCaptcha is unsolved', async () => {
     const wrapper = mount(App, { attachTo: document.body })
 
     await fillAndSubmit(wrapper, typed)
@@ -32,8 +32,8 @@ describe('Contact form', () => {
     expect(toastText()).toMatch(/not a robot/i)
   })
 
-  it('posts exactly what the Recruiter typed to Web3Forms', async () => {
-    stubRecaptcha({ token: 'solved' })
+  it('posts exactly what the Recruiter typed, with the hCaptcha token, to Web3Forms', async () => {
+    stubHcaptcha({ token: 'solved' })
     const wrapper = mount(App, { attachTo: document.body })
 
     await fillAndSubmit(wrapper, typed)
@@ -45,12 +45,13 @@ describe('Contact form', () => {
     expect(JSON.parse(init.body)).toEqual({
       access_key: expect.any(String),
       subject: expect.any(String),
+      'h-captcha-response': 'solved',
       ...typed,
     })
   })
 
   it('confirms the send, clears the fields and resets the robot check', async () => {
-    stubRecaptcha({ token: 'solved' })
+    stubHcaptcha({ token: 'solved' })
     const wrapper = mount(App, { attachTo: document.body })
 
     await fillAndSubmit(wrapper, typed)
@@ -59,11 +60,11 @@ describe('Contact form', () => {
     expect(field(wrapper, 'name').element.value).toBe('')
     expect(field(wrapper, 'email').element.value).toBe('')
     expect(field(wrapper, 'message').element.value).toBe('')
-    expect(grecaptcha.reset).toHaveBeenCalled()
+    expect(hcaptcha.reset).toHaveBeenCalled()
   })
 
   it('shows an error when Web3Forms rejects the message', async () => {
-    stubRecaptcha({ token: 'solved' })
+    stubHcaptcha({ token: 'solved' })
     fetch.mockResolvedValueOnce(
       new Response(JSON.stringify({ success: false }), { status: 400 }),
     )
@@ -76,7 +77,7 @@ describe('Contact form', () => {
   })
 
   it('shows an error when the network fails', async () => {
-    stubRecaptcha({ token: 'solved' })
+    stubHcaptcha({ token: 'solved' })
     fetch.mockRejectedValueOnce(new TypeError('Failed to fetch'))
     const wrapper = mount(App, { attachTo: document.body })
 
@@ -86,7 +87,7 @@ describe('Contact form', () => {
   })
 
   it('disables Send while the message is on its way', async () => {
-    stubRecaptcha({ token: 'solved' })
+    stubHcaptcha({ token: 'solved' })
     let respond
     fetch.mockReturnValueOnce(new Promise((resolve) => (respond = resolve)))
     const wrapper = mount(App, { attachTo: document.body })
