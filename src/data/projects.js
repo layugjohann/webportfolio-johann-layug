@@ -67,9 +67,9 @@ export const projects = [
     id: 'sandcastle-pro',
     title: 'sandcastle-pro',
     pitch:
-      'A preset for Sandcastle (@ai-hero/sandcastle) that fits autonomous coding runs into a Claude Pro or Max usage window.',
+      "A preset for Sandcastle (@ai-hero/sandcastle) built for Claude Pro subscribers: it fits autonomous coding runs into Pro's 5-hour usage window.",
     problem:
-      'Autonomous coding agents assume an API budget. Claude Pro and Max users hit their usage limit mid-run, and the run stops.',
+      'Autonomous coding agents assume an API budget. On Claude Pro, a couple of plan → implement → review → merge cycles use up the 5-hour limit, and the run stops mid-Issue.',
     approach:
       'Plan a feature as a Spec and Issues. Each Issue runs on its own branch through an implementer agent, a review session, then your gate commands (tests, typecheck, lint). Agents never merge, and an Issue paused at the usage limit resumes in the next window.',
     outcome:

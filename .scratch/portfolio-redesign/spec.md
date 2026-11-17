@@ -29,7 +29,7 @@ A redesigned single page that tells a Recruiter "agentic engineer who ships for 
   - Hard offset shadows, notched (stepped) corners, no rounded corners.
 - **Hero:**
   - On the left: a status pill ("Open to FDE & Agentic Engineering roles"), the headline *"I build AI agents that survive contact with real users."*, a sub-line about shipping LLM tools end to end, a "See the work" button, and icon links (GitHub, LinkedIn, Email).
-  - On the right: a large pixel portrait card with a hard accent shadow, and an **agent console** overlapping its bottom-left corner. The console loops a trimmed **real fixline replay**.
+  - On the right: an **agent console** whose top strip shows Johann's pixel avatar, name and "builds agents like this one ↓" (see `.scratch/portfolio-touchups/issues/01`; the console never covers the photo). The console loops a trimmed **real fixline replay**.
   - Behind the hero, pixels drift slowly upward. They don't move when the visitor prefers reduced motion.
 - **Selected work:** three Projects as alternating case-study rows. Each row has an index number, title, pitch, Problem / Approach / Outcome, tech tags, Live/Code links and a screenshot (or a terminal card).
 - **About + Stack:** a 3–4 sentence About paragraph, then text-chip groups:
@@ -121,7 +121,7 @@ A redesigned single page that tells a Recruiter "agentic engineer who ships for 
 - Launch content, in this order:
   1. **fixline**: featured, in progress. Live: fixline-phi.vercel.app. Repo: public, github.com/layugjohann/fixline. Problem/Approach/Outcome come from its README: messy tenant messages → triaged work orders; the agent proposes, deterministic code applies; rules, not the model's confidence, route work to human review; golden-scenario evals, including prompt injection; replayable traces; $0 to run on free tiers.
   2. **availability-runs**: featured, in progress. Live: availability-runs.vercel.app. Repo: none (private client work). Built for a real client. Rules live in code, and the LLM is used only for judgement (fuzzy matching, exceptions). Every change is a proposal the client approves. Outcome, exactly in substance: *"Running end to end on a mirrored practice Trello with fictional data. Evals track wrong matches separately (target: zero). Real-data rollout pending client approval."* Framed as the predecessor that fixline is the agent sequel to.
-  3. **sandcastle-pro**: shipped. Repo: public, github.com/layugjohann/sandcastle-pro. No Live link. A Sandcastle preset (credit `@ai-hero/sandcastle`) that fits autonomous coding runs into a Claude Pro/Max usage window. Spec + Issues; each Issue on its own branch goes through an implementer agent, a review session, and gate commands. Agents never merge, and paused Issues resume in the next window.
+  3. **sandcastle-pro**: shipped. Repo: public, github.com/layugjohann/sandcastle-pro. No Live link. A Sandcastle preset (credit `@ai-hero/sandcastle`) that fits autonomous coding runs into Claude Pro's 5-hour usage window (built for Pro subscribers only). Spec + Issues; each Issue on its own branch goes through an implementer agent, a review session, and gate commands. Agents never merge, and paused Issues resume in the next window.
 - Rules:
   - Every Project in the data has at least one public link.
   - No placeholder text (`[?]`) may ship. An unknown Outcome is cut back to what is verified.
