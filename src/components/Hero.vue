@@ -32,13 +32,17 @@ import AgentConsole from './AgentConsole.vue'
       </div>
     </div>
 
-    <div class="visual">
-      <figure class="portrait">
-        <img :src="person.portrait" :alt="`${person.name}, pixel portrait`" />
-        <figcaption>{{ person.name }}</figcaption>
-      </figure>
-      <AgentConsole class="console" />
-    </div>
+    <AgentConsole class="console">
+      <template #top>
+        <div class="operator">
+          <img :src="person.portrait" :alt="`${person.name}, pixel portrait`" />
+          <div>
+            <strong>{{ person.name }}</strong>
+            <span>builds agents like this one ↓</span>
+          </div>
+        </div>
+      </template>
+    </AgentConsole>
   </header>
 </template>
 
@@ -126,45 +130,40 @@ h1 {
 .icon-btn:focus-visible {
   border-color: var(--accent);
 }
-.visual {
-  position: relative;
-  padding: 0 0 70px 40px;
-}
 .console {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 78%;
+  min-width: 0;
 }
 .icon-btn img,
-.portrait img {
+.operator img {
   image-rendering: pixelated;
 }
-.portrait {
-  position: relative;
-  margin: 0 0 0 auto;
-  max-width: 380px;
-  aspect-ratio: 4 / 5;
-  overflow: hidden;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 12%, var(--panel)), var(--panel));
-  border: 2px solid var(--line);
-  box-shadow: var(--shadow-hard);
+.operator {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border-bottom: 2px solid var(--line);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 10%, var(--panel)), var(--panel));
+  font-family: var(--font-body);
 }
-.portrait img {
-  display: block;
-  width: 100%;
-  height: 100%;
+.operator img {
+  width: 96px;
+  height: 96px;
+  flex: none;
   object-fit: cover;
+  object-position: center 20%;
+  border: 2px solid var(--line);
+  box-shadow: 4px 4px 0 var(--accent);
 }
-figcaption {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  background: var(--accent);
-  color: var(--on-accent);
-  font-family: var(--font-label);
-  font-size: 11px;
-  padding: 4px 8px;
+.operator strong {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 22px;
+}
+.operator span {
+  font-size: 13px;
+  color: var(--muted);
 }
 @keyframes blink {
   50% {
@@ -185,17 +184,12 @@ figcaption {
     gap: 40px;
     padding: 32px 16px 64px;
   }
-  .visual {
-    padding: 0;
-  }
-  .portrait {
-    margin: 0 auto;
-    width: calc(100% - 10px);
-  }
   .console {
-    position: relative;
     width: calc(100% - 8px);
-    margin-top: 24px;
+  }
+  .operator img {
+    width: 72px;
+    height: 72px;
   }
 }
 </style>

@@ -22,6 +22,8 @@ onBeforeUnmount(() => clearInterval(timer))
 
 <template>
   <section class="console" aria-label="Agent console: a fixline replay">
+    <!-- Optional strip above the replay, e.g. the hero's portrait. -->
+    <slot name="top" />
     <div class="head">
       <span>fixline · replay · {{ replay.id }}</span>
       <i class="dot" aria-hidden="true"></i>

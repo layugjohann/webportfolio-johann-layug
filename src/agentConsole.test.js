@@ -13,6 +13,16 @@ describe('the agent console', () => {
     expect(wrapper.text()).toMatch(/fixline · replay/i)
   })
 
+  it("carries Johann's portrait, name and caption, with no separate portrait card to cover", () => {
+    const hero = mount(App).find('.hero')
+    const console = hero.find('[aria-label^="Agent console"]')
+
+    expect(console.find('img[alt="Johann Layug, pixel portrait"]').exists()).toBe(true)
+    expect(console.text()).toContain('Johann Layug')
+    expect(console.text()).toContain('builds agents like this one ↓')
+    expect(hero.findAll('img[alt$="pixel portrait"]')).toHaveLength(1)
+  })
+
   it('shows every replay line at once when the visitor prefers reduced motion', () => {
     stubMatchMedia({ reducedMotion: true })
 
