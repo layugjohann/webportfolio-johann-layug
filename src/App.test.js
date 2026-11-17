@@ -1,23 +1,12 @@
 import { describe, expect, it, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import App from './App.vue'
-import projectData from './data/projects.json'
+import { fixtureProject } from './test/fixtures'
+import { projects as projectData } from './data/projects'
 
 const fixtureProjects = [
-  {
-    id: 'fixture-one',
-    title: 'Fixture One',
-    description: 'First fixture project.',
-    link: 'https://example.com/one',
-    img: '',
-  },
-  {
-    id: 'fixture-two',
-    title: 'Fixture Two',
-    description: 'Second fixture project.',
-    link: 'https://example.com/two',
-    img: '',
-  },
+  fixtureProject({ id: 'fixture-one', title: 'Fixture One' }),
+  fixtureProject({ id: 'fixture-two', title: 'Fixture Two' }),
 ]
 
 describe('the page', () => {
