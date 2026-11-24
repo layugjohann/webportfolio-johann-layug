@@ -7,8 +7,8 @@ export const person = {
   tagline: 'Full-stack engineer shipping LLM-powered tools end to end, from the first customer conversation to the deployed agent.',
   portrait: '/images/johann-pixel3.png',
   location: 'Philippines (UTC+8) · Open to remote',
-  // Empty until a résumé exists; the Résumé link renders only when this is set.
-  resumeUrl: '',
+  // Built from resume/resume.html with `npm run resume`. The Résumé link renders only when this is set.
+  resumeUrl: '/Johann-Layug-Resume.pdf',
   about:
     'I start where the client is: their messy inputs, their existing tools, the people who will live with the result. ' +
     'Before an agent touches real data I write the evals, so "it works" is a number, not a feeling. ' +

@@ -90,13 +90,13 @@ export const projects = [
     id: 'sandcastle-pro',
     title: 'sandcastle-pro',
     pitch:
-      "A preset for Sandcastle (@ai-hero/sandcastle) built for Claude Pro subscribers: it fits autonomous coding runs into Pro's 5-hour usage window.",
+      "A preset for Matt Pocock's Sandcastle (@ai-hero/sandcastle) built for Claude Pro subscribers: it fits autonomous coding runs into Pro's 5-hour usage window.",
     problem:
       'Autonomous coding agents assume an API budget. On Claude Pro, a couple of plan → implement → review → merge cycles use up the 5-hour limit, and the run stops mid-Issue.',
     approach:
       'Plan a feature as a Spec and Issues. Each Issue runs on its own branch through an implementer agent, a review session, then your gate commands (tests, typecheck, lint). Agents never merge, and an Issue paused at the usage limit resumes in the next window.',
     outcome:
-      'Shipped as a CLI: `sandcastle-pro init` sets up a repo, and `sandcastle-pro run` works through ready Issues, leaving each finished one as a branch or Pull Request for review.',
+      'An open-source CLI, not yet on npm: `sandcastle-pro init` sets up a repo, and `sandcastle-pro run` works through ready Issues, leaving each finished one as a branch or Pull Request for review. It built retail-ops-agent, fixline and availability-runs.',
     tags: ['TypeScript', 'Claude Code', 'Agents', 'CLI'],
     status: 'shipped',
     live: '',

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Johann Anthony Layug — Résumé</title>
+<!-- Source of public/Johann-Layug-Resume.pdf. Rebuild with: npm run resume -->
+<style>
+  @page { size: letter; margin: 0.5in 0.6in; }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    margin: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 9.4pt;
+    line-height: 1.38;
+    color: #1f2328;
+  }
+  a { color: inherit; text-decoration: none; }
+  header { margin-bottom: 10pt; }
+  h1 { font-size: 21pt; font-weight: 600; letter-spacing: -0.01em; margin: 0; }
+  .headline { font-size: 11pt; font-weight: 500; color: #2b5fa8; margin: 1pt 0 5pt; }
+  .meta { color: #57606a; margin: 0; }
+  .meta span { white-space: nowrap; }
+  .nb { white-space: nowrap; }
+  .meta span + span::before { content: "·"; margin: 0 5pt; color: #8c959f; }
+  h2 {
+    font-size: 8.4pt; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    color: #2b5fa8; margin: 11pt 0 5pt; padding-bottom: 2.5pt; border-bottom: 0.75pt solid #d0d7de;
+  }
+  p { margin: 0; }
+  .role { display: flex; justify-content: space-between; align-items: baseline; margin-top: 7pt; }
+  .role:first-of-type { margin-top: 0; }
+  .role strong { font-weight: 600; }
+  .role .org { color: #57606a; }
+  .role .when { color: #57606a; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .note { color: #57606a; font-style: italic; margin-top: 1pt; }
+  ul { margin: 3pt 0 0; padding-left: 12pt; }
+  li { margin: 0 0 2.6pt; }
+  li::marker { color: #8c959f; }
+  .skills li { margin-bottom: 1.5pt; }
+  .edu { display: flex; justify-content: space-between; margin-bottom: 2pt; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Johann Anthony Layug</h1>
+  <p class="headline">AI Engineer: Agents, Evals, Deployment</p>
+  <p class="meta"><span>Bulacan, Philippines (UTC+8)</span><span>Open to remote (4+ hrs US overlap) or hybrid in Metro Manila</span></p>
+  <p class="meta"><span>+63 906 061 0548</span><span><a href="mailto:layugjohann@gmail.com">layugjohann@gmail.com</a></span><span><a href="https://johann-layug-webportfolio-vue.vercel.app">johann-layug-webportfolio-vue.vercel.app</a></span></p>
+  <p class="meta"><span><a href="https://github.com/layugjohann">github.com/layugjohann</a></span><span><a href="https://www.linkedin.com/in/johannlayug/">linkedin.com/in/johannlayug</a></span></p>
+</header>
+
+<h2>Summary</h2>
+<p>AI engineer who builds agents that survive contact with real users. I start from the client's messy inputs and existing tools, write golden-scenario evals before an agent touches real data, and keep humans approving anything that costs money, with every tool call traced. Shipped four agent systems in 2026, one for a real client. Trained as a journalist, so I write specs and client updates people actually read.</p>
+
+<h2>Experience</h2>
+<div class="role"><span><strong>Independent AI Engineer</strong> <span class="org">— Remote</span></span><span class="when">Mar 2026 – Present</span></div>
+<p class="note">Client engagement plus open-source agent products, each with a live demo or public repo.</p>
+<ul>
+  <li><strong>availability-runs (client work):</strong> Took a client's manual availability process from discovery to a working tool: an agent that matches sales-report rows to Trello product cards and proposes status changes the client approves. Kept the business rules in code and used the LLM only for fuzzy matching and exceptions. On a 40-case labelled eval it auto-matched 35/35 rows with zero wrong matches, versus 16/35 for a naive matcher, at about 217 input tokens per run.</li>
+  <li><strong><a href="https://github.com/layugjohann/retail-ops-agent">retail-ops-agent</a>:</strong> Built a 3-agent pipeline (Intake, Analyst, Ops) in Python and Pydantic AI that turns a retailer's messy daily CSVs into validated BI data and tiered actions. A rule table, not model confidence, decides which actions run and which wait for human approval; the ERP sits behind an 8-tool MCP server. 33 golden scenarios, including planted prompt injections, require 100% "no reorder without approval"; ~257 unit tests; $0 to run on free-tier models.</li>
+  <li><strong><a href="https://github.com/layugjohann/fixline">fixline</a>:</strong> Built a Next.js agent that turns messy tenant messages into triaged Trello work orders using read-only tools, with deterministic code applying its proposals. Wrote 79 golden scenarios (12 prompt-injection) with rule-based and <span class="nb">LLM-judge</span> graders, and compared models: <span class="nb">gpt-oss-120b</span> passed 80% vs 60% for Qwen, with 100% injection resistance. Traced most failures to rejected tool calls and fixed them with retries and a roster lookup.</li>
+  <li><strong><a href="https://github.com/layugjohann/sandcastle-pro">sandcastle-pro</a>:</strong> Open-source TypeScript CLI, derived from Matt Pocock's Sandcastle sandbox, that runs autonomous coding agents inside Claude Pro's 5-hour usage window: each Issue goes implementer → review → test gate on its own branch, opens a PR, never merges, and resumes after the limit resets. Used to build the three projects above.</li>
+</ul>
+
+<div class="role"><span><strong>Operations Assistant (part-time)</strong> <span class="org">— Edwin Layug Sculptures and Designs</span></span><span class="when">2020 – Jan 2026</span></div>
+<ul>
+  <li>Ran day-to-day coordination of client commissions with the owner, turning recurring operational problems into simpler workflows and digital tools.</li>
+  <li>Trained staff on equipment and procedures.</li>
+</ul>
+
+<div class="role"><span><strong>Game Support Associate</strong> <span class="org">— Adish International</span></span><span class="when">2018 – 2019</span></div>
+<ul>
+  <li>Resolved player issues under response-time targets, explaining technical problems to non-technical users in clear writing.</li>
+  <li>Logged recurring issues and resolutions so the team could spot patterns.</li>
+</ul>
+
+<h2>Skills</h2>
+<ul class="skills">
+  <li><strong>Agents &amp; LLMs:</strong> Claude Code, Pydantic AI, Vercel AI SDK, MCP, tool use, evals (golden scenarios, LLM-as-judge), tracing, prompt-injection testing; Claude, OpenAI, Groq and Gemini APIs</li>
+  <li><strong>Languages &amp; frameworks:</strong> Python, TypeScript, Next.js, Vue, Django, SQL (Postgres, DuckDB)</li>
+  <li><strong>Ship:</strong> Vercel, Streamlit, GitHub Actions, Docker, Playwright, n8n</li>
+</ul>
+
+<h2>Education</h2>
+<div class="edu"><span><strong>Zuitt Coding Bootcamp</strong> — Tech Career Program, full-stack web development</span><span class="when">2025 – 2026</span></div>
+<div class="edu"><span><strong>Bulacan State University</strong> — BA Journalism</span><span class="when">2019</span></div>
+<p style="margin-top:4pt">Languages: English (fluent), Filipino (native)</p>
+</body>
+</html>

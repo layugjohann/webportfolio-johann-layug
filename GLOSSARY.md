@@ -24,6 +24,10 @@ _Avoid_: Highlight, pinned
 Whether a Project is _Shipped_ (usable by its intended user today) or _In progress_ (being built; shown with a visible badge).
 _Avoid_: WIP, beta, done
 
+**Résumé**:
+Johann's one-page application document for FDE / Agentic Engineering roles, linked from the site. One version for every application; only its summary line is tailored per role.
+_Avoid_: CV, resume variant
+
 **Pixel art**:
 The site's retro identity: pixel portrait, pixel icons, pixel display font, stepped borders and hard offset shadows. Distinct from Win98 chrome.
 _Avoid_: Retro (too vague)

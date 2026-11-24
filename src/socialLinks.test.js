@@ -19,10 +19,11 @@ describe('social links', () => {
     expect(links.some((href) => href.includes('instagram'))).toBe(false)
   })
 
-  it('include no Résumé link while no résumé is configured', () => {
+  it('include Résumé links that point to the résumé PDF', () => {
     const wrapper = mount(App)
 
     const resumeLinks = wrapper.findAll('a').filter((a) => /^r[ée]sum[ée]/i.test(a.text().trim()))
-    expect(resumeLinks).toHaveLength(0)
+    expect(resumeLinks.length).toBeGreaterThan(0)
+    for (const link of resumeLinks) expect(link.attributes('href')).toBe('/Johann-Layug-Resume.pdf')
   })
 })
