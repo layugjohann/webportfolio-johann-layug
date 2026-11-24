@@ -71,4 +71,38 @@ describe('Selected Work', () => {
     expect(row.querySelector('img')).toBeNull()
     expect(row.textContent).toContain('$ bare')
   })
+
+  it('offers a Demo video only for Projects that have one, loading nothing before the click', () => {
+    const wrapper = mountWith([
+      project({ id: 'vid', title: 'Vid', img: '/images/vid.webp', video: '/videos/vid.mp4' }),
+      project({ id: 'still', title: 'Still', img: '/images/still.webp' }),
+    ])
+
+    const vid = rowFor(wrapper, 'Vid')
+    const play = vid.querySelector('button')
+    expect(play?.getAttribute('aria-label')).toMatch(/play.*Vid.*demo/i)
+    expect(vid.querySelector('video')).toBeNull()
+
+    const still = rowFor(wrapper, 'Still')
+    expect(still.querySelector('button')).toBeNull()
+    expect(still.querySelector('video')).toBeNull()
+  })
+
+  it('swaps the screenshot for the playing Demo video when Play is clicked', async () => {
+    const wrapper = mountWith([
+      project({ id: 'vid', title: 'Vid', img: '/images/vid.webp', video: '/videos/vid.mp4' }),
+    ])
+    const article = wrapper.findAll('article')[0]
+
+    await article.find('button').trigger('click')
+
+    const video = article.find('video')
+    expect(video.attributes('src')).toBe('/videos/vid.mp4')
+    expect(video.attributes('poster')).toBe('/images/vid.webp')
+    expect(video.attributes()).toHaveProperty('controls')
+    expect(video.attributes()).toHaveProperty('autoplay')
+    expect(video.attributes()).toHaveProperty('playsinline')
+    expect(article.find('.shot img').exists()).toBe(false)
+    expect(article.find('button').exists()).toBe(false)
+  })
 })

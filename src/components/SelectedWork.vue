@@ -1,4 +1,6 @@
 <script setup>
+import { nextTick, ref } from 'vue'
+
 defineProps({
   projects: { type: Array, required: true },
 })
@@ -7,6 +9,15 @@ const rowNumber = (i) => String(i + 1).padStart(2, '0')
 
 // The terminal card's lines; a Project without a run shows just its prompt.
 const runLines = (p) => (p.run?.length ? p.run : [`$ ${p.id}`])
+
+// A Demo video stays out of the page (nothing downloads) until Play is clicked;
+// then it takes the screenshot's place and focus moves to it.
+const playing = ref(new Set())
+const play = async (p) => {
+  playing.value = new Set(playing.value).add(p.id)
+  await nextTick()
+  document.getElementById(`video-${p.id}`)?.focus()
+}
 </script>
 
 <template>
@@ -39,7 +50,28 @@ const runLines = (p) => (p.run?.length ? p.run : [`$ ${p.id}`])
       </div>
 
       <div class="shot">
-        <img v-if="p.img" :src="p.img" :alt="`${p.title} screenshot`" loading="lazy" />
+        <video
+          v-if="p.video && playing.has(p.id)"
+          :id="`video-${p.id}`"
+          :src="p.video"
+          :poster="p.img"
+          :aria-label="`${p.title} demo video`"
+          controls
+          autoplay
+          playsinline
+        ></video>
+        <template v-else-if="p.img">
+          <img :src="p.img" :alt="`${p.title} screenshot`" loading="lazy" />
+          <button
+            v-if="p.video"
+            type="button"
+            class="play"
+            :aria-label="`Play ${p.title} demo video`"
+            @click="play(p)"
+          >
+            <span aria-hidden="true">▶</span> Play demo
+          </button>
+        </template>
         <figure v-else class="terminal" :aria-label="`${p.title}, illustrative terminal run`">
           <div class="term-head">
             <i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i>
@@ -177,6 +209,7 @@ dd {
   text-decoration: underline;
 }
 .shot {
+  position: relative;
   aspect-ratio: 16 / 10;
   min-width: 0;
   overflow: hidden;
@@ -189,6 +222,41 @@ dd {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: top left;
+}
+/* The whole recording shows, letterboxed on the panel colour, never cropped. */
+.shot video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: var(--panel);
+}
+.play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border: 0;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-family: var(--font-label);
+  font-size: 13px;
+  cursor: pointer;
+  clip-path: var(--notch);
+  box-shadow: 4px 4px 0 var(--bg);
+}
+.play:hover,
+.play:focus-visible {
+  background: var(--accent-2);
+}
+.play:focus-visible {
+  outline: 3px solid var(--text);
+  outline-offset: 3px;
 }
 .terminal {
   margin: 0;

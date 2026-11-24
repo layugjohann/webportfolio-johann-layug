@@ -8,13 +8,36 @@
 //   status    'shipped' | 'in-progress'
 //   live      URL, or '' for no Live link
 //   repo      URL, or '' for no Code link (e.g. private client work)
-//   img       '/images/…', or '' to show a terminal card instead
+//   img       '/images/projects/<id>.webp' (1600px wide), or '' to show a
+//             terminal card instead
+//   video     optional '/videos/<id>.mp4': a Demo video, played from the
+//             screenshot (needs img). H.264, 1080px tall, CRF ~28, +faststart,
+//             no audio. Leave it out until the recording exists.
 //   run       optional string[]: the terminal card's illustrative lines
 //   featured  boolean
 //
 // Rules: every Project has at least one public link, and no placeholder text
 // ships; an unverified Outcome is cut back to what is verified.
 export const projects = [
+  {
+    id: 'retail-ops-agent',
+    title: 'retail-ops-agent',
+    pitch:
+      "Three AI agents turn a retailer's messy daily CSV uploads into trusted BI data, then into investigated, tiered actions, with a human approving anything that costs money.",
+    problem:
+      'At a multi-channel retailer, someone spends every morning fixing CSV headers and chasing store managers, while the inventory planner works out stock cover in a spreadsheet and keys reorders into the ERP by hand. I took the problem from a real FDE job posting.',
+    approach:
+      'A fixed pipeline, with no LLM supervisor: an Intake agent validates and safely fixes uploads, statistics flag anomalies, an Analyst agent investigates them, and an Ops agent proposes actions. A rule table, not model confidence, decides which actions run and which wait for approval. The ERP is behind an MCP server.',
+    outcome:
+      "A live demo replays recorded Ops Days with no wait and no API key. Golden-scenario evals with exact ground truth require 100% on 'no reorder without approval', including prompt injections planted in uploads. It costs $0 to run on free-tier models.",
+    tags: ['Python', 'Pydantic AI', 'Agents', 'MCP', 'Evals', 'DuckDB'],
+    status: 'shipped',
+    live: 'https://cobalt-home-ops.streamlit.app/',
+    repo: 'https://github.com/layugjohann/retail-ops-agent',
+    img: '/images/projects/retail-ops-agent.webp',
+    video: '/videos/retail-ops-agent.mp4',
+    featured: true,
+  },
   {
     id: 'fixline',
     title: 'fixline',
@@ -30,7 +53,7 @@ export const projects = [
     status: 'in-progress',
     live: 'https://fixline-phi.vercel.app',
     repo: 'https://github.com/layugjohann/fixline',
-    img: '',
+    img: '/images/projects/fixline.webp',
     run: [
       '$ npm run eval -- --tag prompt-injection',
       '› sending golden scenarios through Intake',
@@ -54,14 +77,14 @@ export const projects = [
     status: 'in-progress',
     live: 'https://availability-runs.vercel.app',
     repo: '',
-    img: '',
+    img: '/images/projects/availability-runs.webp',
     run: [
       '› sales report in',
       '› rules in code decide availability',
       '› LLM only for judgement: fuzzy matches, exceptions',
       '› every change is a proposal the client approves',
     ],
-    featured: true,
+    featured: false,
   },
   {
     id: 'sandcastle-pro',

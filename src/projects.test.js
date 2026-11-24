@@ -7,8 +7,14 @@ const strings = (value) =>
   typeof value === 'string' ? [value] : Array.isArray(value) ? value.flatMap(strings) : []
 
 describe('the real Project data', () => {
-  it('has the three launch Projects in display order, Featured Projects first', () => {
-    expect(projects.map((p) => p.id)).toEqual(['fixline', 'availability-runs', 'sandcastle-pro'])
+  it('has the Projects in display order, Featured Projects first', () => {
+    expect(projects.map((p) => p.id)).toEqual([
+      'retail-ops-agent',
+      'fixline',
+      'availability-runs',
+      'sandcastle-pro',
+    ])
+    expect(projects.filter((p) => p.featured).map((p) => p.id)).toEqual(['retail-ops-agent', 'fixline'])
     const firstUnfeatured = projects.findIndex((p) => !p.featured)
     expect(projects.slice(firstUnfeatured).every((p) => !p.featured)).toBe(true)
   })
@@ -24,6 +30,10 @@ describe('the real Project data', () => {
       expect(links.length, p.id).toBeGreaterThan(0)
       for (const link of links) expect(link, p.id).toMatch(/^https:\/\//)
     }
+  })
+
+  it('only gives a Demo video to a Project with a screenshot to play it from', () => {
+    for (const p of projects.filter((p) => p.video)) expect(p.img, p.id).toBeTruthy()
   })
 
   it('contains no [?] placeholder text', () => {
